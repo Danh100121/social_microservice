@@ -8,9 +8,11 @@ import com.danhpahm.identity_service.entity.Role;
 import com.danhpahm.identity_service.entity.User;
 import com.danhpahm.identity_service.exception.AppException;
 import com.danhpahm.identity_service.exception.ErrorCode;
+import com.danhpahm.identity_service.mapper.ProfileMapper;
 import com.danhpahm.identity_service.mapper.UserMapper;
 import com.danhpahm.identity_service.repository.RoleRepository;
 import com.danhpahm.identity_service.repository.UserRepository;
+import com.danhpahm.identity_service.repository.httpclient.ProfileClient;
 import com.danhpahm.identity_service.service.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -37,9 +39,13 @@ public class UserServiceImpl implements UserService{
 
     UserMapper userMapper;
 
+    ProfileMapper profileMapper;
+
     RoleRepository roleRepository;
 
     PasswordEncoder passwordEncoder;
+
+    ProfileClient profileClient;
 
     @Override
     public UserResponse getMyInfo() {
@@ -64,6 +70,12 @@ public class UserServiceImpl implements UserService{
 
         try {
             user = userRepository.save(user);
+
+            var profileRequest = profileMapper.toProfileCreationRequest(request);
+            profileRequest.setUserId(user.getId());
+
+            profileClient.createProfile(profileRequest);
+
         } catch (DataIntegrityViolationException e) {
             throw new AppException(ErrorCode.USER_EXISTED);
         }

@@ -23,12 +23,6 @@ public class User {
 
     String password;
 
-    String firstName;
-
-    String lastName;
-
-    LocalDate dob;
-
     @ManyToMany
     Set<Role> roles;
 }
