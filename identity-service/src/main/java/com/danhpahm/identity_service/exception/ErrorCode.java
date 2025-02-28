@@ -10,6 +10,7 @@ public enum ErrorCode {
     USER_EXISTED(1002, "user existed", HttpStatus.BAD_REQUEST),
     INVALID_KEY(1001, "invalid message key",  HttpStatus.BAD_REQUEST),
     USERNAME_INVALID(1003,"username must be at least {min} characters",  HttpStatus.BAD_REQUEST),
+    USERNAME_SPACES_INVALID(1009, "Username must not contain spaces", HttpStatus.BAD_REQUEST),
     PASSWORD_INVALID(1004, "password must be at least {min} characters",  HttpStatus.BAD_REQUEST),
     USER_NOT_EXISTED(1005, "user not existed", HttpStatus.NOT_FOUND),
     UNAUTHENTICATED(1006, "unauthenticated", HttpStatus.UNAUTHORIZED),
