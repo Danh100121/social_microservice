@@ -18,3 +18,7 @@ jwt:
   refreshSignerKey: "BsiYp6sylL4uNT4G5OGZo+4yKquNXkkvfP58hhdPTInhLYMVUA3KUGvBjmmlYDUS"
   valid-duration: 3600 # in second
   refreshable-duration: 36000000000 # in seconds
+
+app:
+  services:
+    profile: http://localhost:8081/profile
